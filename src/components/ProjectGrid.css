@@ -1,0 +1,125 @@
+/* src/components/ProjectGrid.css */
+
+/* 1. Master Layout: 2 Equal Side-by-Side Columns */
+.portfolio-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 perfectly equal vertical columns */
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+/* Base style for both massive master cards */
+.bento-column-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 28px;
+  padding: 32px;
+  overflow: hidden;
+  height: 520px; /* 🏎️ Locks both outer cards to the exact same premium height */
+  transition: all 0.3s ease;
+}
+
+.bento-column-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--card-hover-border);
+}
+
+/* ==========================================================================
+   LEFT CARD INTERNAL LOGIC: HORIZONTAL SPLIT (Text left / Video right)
+   ========================================================================== */
+.card-horizontal-split {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: center;
+}
+
+.card-text-side {
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-video-side {
+  width: 45%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #000000;
+  border: 1px solid var(--card-border);
+}
+
+.bento-embedded-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Prevents portrait mobile layout from cropping */
+}
+
+/* ==========================================================================
+   RIGHT CARD INTERNAL LOGIC: VERTICAL ROWS (Text top / Image bottom)
+   ========================================================================== */
+.card-vertical-rows {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-top-text-row {
+  width: 100%;
+}
+
+.card-bottom-image-row {
+  width: 100%;
+  height: 240px; /* Gives your dashboard screenshot an exact height box */
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  background-color: #101012;
+}
+
+/* Interactive Image Scroll Mask Engine */
+.interactive-window-frame {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.scrolling-screenshot {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 4s ease-in-out;
+}
+
+/* Hover effect triggers scrolling on the dashboard card */
+.card-vertical-rows:hover .scrolling-screenshot {
+  transform: translateY(calc(-100% + 240px)); /* Scrolls smoothly to show the bottom charts */
+}
+
+/* ==========================================================================
+   RESPONSIVE COLLAPSE ENGINE (Mobile Phones)
+   ========================================================================== */
+@media (max-width: 900px) {
+  .portfolio-grid-layout {
+    grid-template-columns: 1fr; /* Drops down to a single vertical column stream */
+    padding: 20px;
+  }
+  .bento-column-card {
+    height: auto; /* Lets heights float naturally on small phone screens */
+    padding: 24px;
+  }
+  .card-horizontal-split {
+    flex-direction: column; /* Stacks text on top of your video on mobile */
+  }
+  .card-text-side, .card-video-side {
+    width: 100%;
+  }
+  .card-video-side {
+    height: 350px;
+  }
+}

@@ -1,0 +1,344 @@
+/* --- 1. GLOBAL VARIANT RESETS & THEMES --- */
+:root {
+  --bg-color: #0d0d0d;
+  --text-main: #ffffff;
+  --text-muted: #a0a0a5;
+  --accent-color: #6366f1; /* Premium indigo tint */
+  --btn-secondary-bg: #16161a;
+  --btn-secondary-border: #26262b;
+}
+
+[data-theme="light"] {
+  --bg-color: #f7f7f9;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --accent-color: #4f46e5;
+  --btn-secondary-bg: #ffffff;
+  --btn-secondary-border: #e2e2e9;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+.portfolio-wrapper {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  min-height: 100vh;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* --- 2. NAVIGATION --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 40px;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+}
+
+.theme-toggle-btn {
+  background: var(--btn-secondary-bg);
+  color: var(--text-main);
+  border: 1px solid var(--btn-secondary-border);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* --- 3. HERO SECTION --- */
+.hero-section {
+  min-height: 90vh;        /* Forces the hero to occupy the entire opening screen */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically centers the text cluster */
+  align-items: center;     /* Horizontally centers the text cluster */
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+  text-align: center;
+}
+
+.hero-greeting {
+  font-family: monospace;
+  color: var(--accent-color);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+}
+
+.hero-main-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem); /* Dynamically scales sizes seamlessly across laptops/mobiles */
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.04em; /* Tight letter spacing creates that premium editorial feel */
+  color: var(--text-main);
+  max-width: 900px;
+}
+
+.hero-role-break {
+  display: block;
+  color: var(--text-muted);
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.highlight-name {
+  color: var(--text-main);
+  position: relative;
+  background: linear-gradient(to right, var(--text-main), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-subtext {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: var(--text-muted);
+  max-width: 650px;
+  line-height: 1.6;
+  margin-top: 32px;
+}
+
+.hero-cta-group {
+  display: flex;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.btn-hero {
+  padding: 14px 28px;
+  border-radius: 30px; /* Perfectly round pill layout */
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btn-solid {
+  background-color: var(--text-main);
+  color: var(--bg-color);
+}
+
+.btn-solid:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--btn-secondary-border);
+}
+
+.btn-outline:hover {
+  background: var(--btn-secondary-bg);
+  border-color: var(--text-main);
+  transform: translateY(-2px);
+}
+
+/* --- SCROLL INDICATOR ENGINE --- */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.scroll-text {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.scroll-arrow {
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  animation: bounce 2s infinite; /* Continuous micro-movement */
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-6px); }
+  60% { transform: translateY(-3px); }
+}
+
+/* Mobile Layout Overrides */
+@media (max-width: 600px) {
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    max-width: 280px;
+  }
+  .btn-hero {
+    text-align: center;
+  }
+  .scroll-indicator {
+    display: none; /* Hide scroll note on small smartphone views */
+  }
+}
+/* --- 1. DEFINE THE LIFT-AND-FADE ANIMATION KEYFRAMES --- */
+@keyframes textPopUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px); /* Starts 30px lower down the screen */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);    /* Ends perfectly at its original position */
+  }
+}
+
+/* --- 2. APPLY THE ANIMATION TO THE HERO TEXT ELEMENTS --- */
+.hero-greeting,
+.hero-main-title,
+.hero-subtext,
+.hero-cta-group {
+  opacity: 0; /* Ensures items are hidden before the animation begins */
+  animation: textPopUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* Smooth modern easing curve */
+}
+
+/* --- 3. STAGGER THE TIMING (The secret to the high-end feel) --- */
+/* Each element waits a fraction of a second longer than the previous one */
+
+.hero-greeting {
+  animation-delay: 0.1s;
+}
+
+.hero-main-title {
+  animation-delay: 0.25s;
+}
+
+.hero-subtext {
+  animation-delay: 0.4s;
+}
+
+.hero-cta-group {
+  animation-delay: 0.55s;
+}
+
+/* --- 4. BUTTON COMPONENTS --- */
+.btn {
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: var(--btn-secondary-bg);
+  color: var(--text-main);
+  border: 1px solid var(--btn-secondary-border);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+}
+
+/* --- 5. SECTIONS --- */
+.section-container {
+  padding: 60px 0;
+}
+
+.section-header {
+  /* max-width: 1200px; */
+  justify-content: center;
+  gap: 16px;
+  padding: 0 40px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.section-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.section-header p {
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* --- 6. FOOTER/CONTACT --- */
+.contact-footer {
+  /* max-width: 1000px; */
+  padding: 100px 40px;
+  border-top: 1px solid var(--btn-secondary-border);
+  margin-top: 60px auto 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-footer h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+.contact-footer p {
+  color: var(--text-muted);
+  margin-top: 8px;
+  font-size: 1.1rem;
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.contact-links a {
+  color: var(--text-main);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid var(--btn-secondary-border);
+  padding-bottom: 4px;
+  transition: border-color 0.2s ease;
+}
+
+.contact-links a:hover {
+  border-color: var(--accent-color);
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
+  .hero-title { font-size: 2.2rem; }
+  .hero-buttons { flex-direction: column; }
+  .navbar { padding: 20px; }
+  .hero-section { padding: 60px 20px 40px 20px; }
+  .section-header { padding: 0 20px 20px 20px; }
+  .contact-footer { padding: 60px 20px; }
+}
