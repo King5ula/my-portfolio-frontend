@@ -30,7 +30,7 @@ export default function ChatWidget() {
 
     try {
       // 2. Fetch connection to your custom proxy Express server
-      const response = await fetch('https://onrender.com', {
+      const response = await fetch('https://my-portfolio-backend-djn4.onrender.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userMessage }),
