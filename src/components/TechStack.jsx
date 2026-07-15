@@ -3,7 +3,7 @@ import './TechStack.css';
 import HTMLIcon from '../assets/HTML5.svg';
 import CSSIcon from '../assets/CSS3.svg';
 import JSIcon from '../assets/JavaScript.svg';
-import ReactIcon from '../assets/React.svg';
+import ReactIcon from '../assets/react.svg';
 import NodeIcon from '../assets/Node.js.svg';
 import ExpressIcon from '../assets/Express.svg';
 import MySQLIcon from '../assets/MySQL.svg';
