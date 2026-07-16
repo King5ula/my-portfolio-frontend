@@ -36,7 +36,7 @@ export default function ProjectGrid() {
           <span className="tag">Interactive Preview</span>
           <h3>Admin Dashboard Management</h3>
           <p className="project-description">
-            A comprehensive overview of the administrative command module interface. This control panel aggregates live task dispatches, service request tracking telemetry, and real-time client pipeline statuses. Hover to scroll the layout canvas.
+            A comprehensive overview of the administrative command module interface. This control panel aggregates live task dispatches, service request tracking telemetry, and real-time client pipeline statuses.
           </p>
         </div>
         
