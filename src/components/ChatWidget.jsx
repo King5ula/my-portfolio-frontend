@@ -100,6 +100,8 @@ export default function ChatWidget() {
           {/* User Input Input Tray Form */}
           <form onSubmit={handleSendMessage} className="chat-input-form">
             <input
+              id="chat-message-input"
+              name="message"
               type="text"
               placeholder="Ask about my projects..."
               value={input}
