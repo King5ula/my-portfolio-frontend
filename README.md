@@ -1,16 +1,48 @@
-# React + Vite
+# Portfolio Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+My developer portfolio: hero, tech stack, projects, contact links, and a
+"David AI Clone" chat widget.
 
-Currently, two official plugins are available:
+Built with Next.js 14 (App Router), TypeScript and Tailwind CSS. Pairs with
+the backend repo, `my-portfolio-backend` (FastAPI), which the chat widget
+calls over REST.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Quickstart
 
-## React Compiler
+```bash
+npm install
+cp .env.example .env.local   # optional: defaults to http://localhost:8000
+npm run dev
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Open `http://localhost:3000`. The chat widget needs the backend running;
+everything else works without it.
 
-## Expanding the ESLint configuration
+```bash
+npm run build       # production build
+npm run typecheck   # tsc --noEmit
+npm run lint        # next lint (next/core-web-vitals)
+npm run test        # vitest run
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Project layout
+
+```
+app/           layout.tsx (fonts, metadata), page.tsx (the one page), globals.css (theme tokens)
+components/    One file per section, plus ThemeShell (dark/light toggle) and ChatWidget
+lib/           config.ts (env), api-client.ts (backend calls), schemas.ts (Zod), tech-stack.ts (data)
+public/        Icons, the project video and screenshot
+```
+
+## Configuration
+
+| Variable | Purpose | Default |
+|---|---|---|
+| `NEXT_PUBLIC_BACKEND_URL` | Base URL of the FastAPI backend | `http://localhost:8000` |
+
+## Theming
+
+Colors are CSS custom properties in `app/globals.css`, mapped to Tailwind
+color names in `tailwind.config.ts` (`bg`, `ink`, `muted`, `accent`,
+`surface`, `line`). The light theme only overrides the variables, so
+components never need per-theme classes.

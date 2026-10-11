@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme tokens, exposed to Tailwind as colors in tailwind.config.ts. */
+:root {
+  --bg-color: #0d0d0d;
+  --text-main: #ffffff;
+  --text-muted: #a0a0a5;
+  --accent-color: #6366f1;
+  --surface-bg: #16161a;
+  --surface-border: #26262b;
+}
+
+[data-theme="light"] {
+  --bg-color: #f7f7f9;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --accent-color: #4f46e5;
+  --surface-bg: #ffffff;
+  --surface-border: #e2e2e9;
+}
+
+html {
+  scroll-behavior: smooth;
+}
