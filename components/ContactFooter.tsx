@@ -17,7 +17,7 @@ export function ContactFooter() {
             </>
           }
         >
-          <p>I am currently open to junior developer roles and freelance projects.</p>
+          <p>I am currently open to developer roles and freelance projects.</p>
         </SectionHeading>
 
         <div className="grid gap-10 md:grid-cols-2 md:gap-16">

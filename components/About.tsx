@@ -37,13 +37,13 @@ export function About() {
         }
       >
         <p>
-          I&apos;m David. I spent several years in residential and commercial real estate and
-          at an internet provider, building CRM systems and keeping listings and customer data
+          I&apos;m David. I spent several years in residential and commercial real estate, 
+          building CRM systems and keeping listings and customer data
           in sync, before taking time out as a stay-at-home dad.
         </p>
         <p className="mt-4">
           I moved into software because I wanted to build those tools properly. The missions
-          below are from my Level 5 diploma in advanced full-stack development: each one a real
+          below are from my diploma in advanced AI-powered full-stack development: each one a real
           brief, a chosen stack and something specific I learned.
         </p>
       </SectionHeading>
