@@ -16,3 +16,7 @@ next-env.d.ts
 !.vscode/extensions.json
 .idea
 .DS_Store
+
+# scroll-craft verification output and raw generations
+scrollcraft/builds/*/lab/
+scrollcraft/builds/*/out/

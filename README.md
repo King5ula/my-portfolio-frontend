@@ -32,7 +32,16 @@ app/           layout.tsx (fonts, metadata), page.tsx (the one page), globals.cs
 components/    One file per section, plus ThemeShell (dark/light toggle) and ChatWidget
 lib/           config.ts (env), api-client.ts (backend calls), schemas.ts (Zod), tech-stack.ts (data)
 public/        Icons, the project video and screenshot
+vendor/        The scroll-craft engine, copied verbatim (never edit it)
+scrollcraft/   The design brief and fingerprint registry behind the page
 ```
+
+The page is a scroll-driven typographic poster built with the
+[scroll-craft](https://github.com/nateherkai/scroll-craft) engine: sections
+carry `data-sc-*` attributes and `components/ScrollCraftRoot.tsx` mounts the
+engine over them. `components/Quake.tsx` is the pointer "earthquake" on the
+display type. The plan behind the page is
+`scrollcraft/builds/portfolio/BRIEF.md`.
 
 ## Configuration
 

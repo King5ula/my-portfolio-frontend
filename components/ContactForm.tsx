@@ -36,9 +36,11 @@ export function ContactForm() {
   };
 
   return (
+    // method="post" so a no-JavaScript submit never puts the message in the URL.
     <form
+      method="post"
       onSubmit={handleSubmit}
-      className="rounded-[28px] border border-line bg-surface p-6 text-left md:p-8"
+      className="rounded-[var(--sc-r-lg)] border border-line bg-surface p-6 text-left md:p-8"
     >
       <label className="block">
         <span className={LABEL}>Your name</span>
@@ -80,7 +82,7 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={status.kind === "sending"}
-          className="rounded-[30px] bg-accent px-7 py-3 font-semibold text-white transition-all duration-[250ms] hover:-translate-y-0.5 disabled:cursor-default disabled:opacity-60 disabled:hover:translate-y-0"
+          className="rounded-full bg-accent px-7 py-3 font-semibold text-accent-ink transition-transform duration-150 hover:-translate-y-0.5 active:translate-y-px disabled:cursor-default disabled:opacity-60 disabled:hover:translate-y-0"
         >
           {status.kind === "sending" ? "Sending..." : "Send message"}
         </button>

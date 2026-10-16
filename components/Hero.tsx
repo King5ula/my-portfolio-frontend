@@ -1,56 +1,68 @@
-const HERO_BUTTON =
-  "rounded-[30px] px-7 py-3.5 text-center text-base font-semibold transition-all duration-[250ms] hover:-translate-y-0.5";
-const OUTLINE_BUTTON = `${HERO_BUTTON} border border-line text-ink hover:border-ink hover:bg-surface`;
+import { Quake } from "@/components/Quake";
 
-// Each line starts hidden and lifts in; the delays stagger them.
-const POP_UP = "opacity-0 animate-text-pop-up";
+// Real figures from the internship MVP's backend and frontend repos, main
+// branch (Aug 23 to Oct 9 2026): 28 distinct agent functions in app/agents,
+// each its own structured model call; 246 backend + 14 frontend tests. The
+// product and company stay unnamed by agreement.
+const PROOF = [
+  { value: "28", label: "Distinct AI agents" },
+  { value: "260", label: "Automated tests" },
+  { value: "7", label: "Weeks, first commit to MVP" },
+];
 
+// Act 1, Impact. Pinned: the name is the ground the whole time, and three
+// beats cross over beneath it. The first greets, so the landing view is full.
 export function Hero() {
   return (
-    <header className="relative mx-auto flex min-h-[90vh] max-w-[1100px] flex-col items-center justify-center px-5 pb-10 pt-[60px] text-center md:px-10 md:py-0">
-      <span
-        className={`${POP_UP} mb-5 font-mono text-base tracking-[0.05em] text-accent [animation-delay:0.1s]`}
-      >
-        {"// welcome to my space"}
-      </span>
+    <section id="top" data-sc-act="pin" data-sc-span="2.3" data-sc-dwell="0.2">
+      <div data-sc-stage className="flex flex-col justify-between">
+        <h1 className="hero-name px-5 pt-[clamp(5rem,13vh,8rem)] md:px-10">
+          <Quake text="DAVID" className="poster-name block" />
+          <Quake text="TUISAULA" className="poster-name block" />
+          <span className="sr-only">, full stack developer</span>
+        </h1>
 
-      <h1
-        className={`${POP_UP} max-w-[900px] text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold leading-[1.1] tracking-[-0.04em] [animation-delay:0.25s]`}
-      >
-        Hi, I&apos;m{" "}
-        <span className="bg-gradient-to-r from-ink to-accent bg-clip-text text-transparent">
-          David Tuisaula
-        </span>
-        .<span className="mt-2 block font-bold text-muted">A Full Stack Developer.</span>
-      </h1>
+        <div className="relative px-5 pb-[clamp(2.5rem,9vh,6rem)] md:px-10">
+          <div data-sc-cue="0 0.34 0" className="max-w-[40rem]">
+            <p className="text-[length:var(--sc-t-xl)] font-semibold leading-[1.15] tracking-[-0.02em]">
+              Full stack developer.
+            </p>
+            <p className="mt-3 max-w-[34rem] text-[length:var(--sc-t-base)] leading-[1.6] text-muted">
+              Diploma finished, internship delivered, and building for a real client right now.
+            </p>
+          </div>
 
-      <p
-        className={`${POP_UP} mt-8 max-w-[650px] text-[clamp(1.05rem,2vw,1.25rem)] leading-[1.6] text-muted [animation-delay:0.4s]`}
-      >
-        From building relationships to building clean, functional digital products. I close
-        the gap between complex ideas and scalable software—one application at a time.
-      </p>
+          <p
+            data-sc-cue="0.28 0.66"
+            data-sc-kinetic="lines"
+            className="absolute bottom-[clamp(2.5rem,9vh,6rem)] left-5 right-5 max-w-[52rem] text-[length:var(--sc-t-2xl)] font-bold leading-[1.06] tracking-[-0.03em] md:left-10"
+          >
+            I led the technical build of a live AI product: the system design, the data pipeline
+            and the agent orchestration.
+          </p>
 
-      <div
-        className={`${POP_UP} mt-10 flex w-full max-w-[280px] flex-col gap-4 [animation-delay:0.55s] sm:w-auto sm:max-w-none sm:flex-row`}
-      >
-        <a href="#missions" className={`${HERO_BUTTON} bg-ink text-bg hover:opacity-95`}>
-          Explore the missions
-        </a>
-        <a href="#skills" className={OUTLINE_BUTTON}>
-          Tech Stack
-        </a>
-        <a href="#contact" className={OUTLINE_BUTTON}>
-          Let&apos;s Talk
-        </a>
+          <dl
+            data-sc-cue="0.6 1 0.3 0"
+            className="absolute bottom-[clamp(2.5rem,9vh,6rem)] left-5 right-5 grid max-w-[60rem] grid-cols-3 gap-6 md:left-10"
+          >
+            {PROOF.map((item, i) => (
+              // dt first for a valid list; column-reverse puts the number on top.
+              <div key={item.label} className="flex flex-col-reverse border-t border-line pt-4">
+                <dt className="mono-label mt-3 text-muted">{item.label}</dt>
+                <dd className="poster-title text-[clamp(3rem,9vw,8rem)] text-ink">
+                  <span
+                    className="sc-nums"
+                    data-sc-count={`0 ${item.value}`}
+                    data-sc-count-at={`${0.62 + i * 0.04} 0.86`}
+                  >
+                    {item.value}
+                  </span>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </div>
-
-      <div className="absolute bottom-10 hidden flex-col items-center gap-2 sm:flex">
-        <span className="text-[0.8rem] font-medium uppercase tracking-[0.15em] text-muted">
-          Scroll to explore
-        </span>
-        <div className="animate-scroll-bounce text-[1.2rem] text-muted">↓</div>
-      </div>
-    </header>
+    </section>
   );
 }

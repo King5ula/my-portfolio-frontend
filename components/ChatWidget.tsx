@@ -9,7 +9,7 @@ interface ChatMessage {
 }
 
 const BUBBLE = "max-w-[80%] rounded-[14px] px-3.5 py-2.5 text-[0.9rem] leading-[1.4]";
-const USER_BUBBLE = `${BUBBLE} rounded-br-sm bg-accent text-white`;
+const USER_BUBBLE = `${BUBBLE} rounded-br-sm bg-accent text-accent-ink`;
 const MODEL_BUBBLE = `${BUBBLE} rounded-bl-sm border border-line bg-surface text-ink`;
 
 export function ChatWidget() {
@@ -54,10 +54,10 @@ export function ChatWidget() {
     <div className="fixed bottom-[30px] right-[30px] z-[1000] max-[480px]:bottom-5 max-[480px]:right-5">
       {!isOpen && (
         <button
-          className="rounded-[30px] bg-accent px-6 py-3.5 font-semibold text-white shadow-[0_8px_24px_rgba(99,102,241,0.3)] transition-all duration-[250ms] hover:-translate-y-[3px] hover:scale-[1.02] hover:shadow-[0_12px_28px_rgba(99,102,241,0.45)]"
+          className="rounded-full bg-accent px-6 py-3.5 font-semibold text-accent-ink shadow-[0_10px_24px_-6px_hsl(40_10%_2%/0.5)] transition-transform duration-150 hover:-translate-y-0.5 active:translate-y-px"
           onClick={() => setIsOpen(true)}
         >
-          💬 Chat with David AI
+          Chat with David AI
         </button>
       )}
 

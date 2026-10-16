@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Inter } from "next/font/google";
+import { Archivo, JetBrains_Mono } from "next/font/google";
+// Engine CSS first, so Tailwind's preflight and utilities win any overlap.
+import "@/vendor/scrollcraft/scrollcraft.css";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+// Variable width axis: the poster name sets expanded, the stack wall condensed.
+const archivo = Archivo({ subsets: ["latin"], axes: ["wdth"], variable: "--font-archivo" });
+const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
   title: "David Tuisaula | Full Stack Developer",
   description:
-    "Portfolio of David Tuisaula, a full stack developer building clean, functional digital products.",
+    "Full stack developer. Led the technical build of a live AI product, now building a field service system for Pacific Generators.",
   icons: {
     // The .ico is the fallback for browsers that don't take SVG favicons.
     icon: [
@@ -21,7 +25,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${archivo.variable} ${mono.variable}`}>
       <body className="font-sans">{children}</body>
     </html>
   );

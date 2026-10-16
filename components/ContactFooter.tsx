@@ -1,44 +1,56 @@
+"use client";
+
 import { ContactForm } from "@/components/ContactForm";
-import { SectionHeading } from "@/components/SectionHeading";
+import { useTheme } from "@/components/ThemeShell";
 
 const LINK =
-  "border-b-2 border-line pb-1 font-semibold text-ink transition-colors duration-200 hover:border-accent";
+  "rounded-sm text-[length:var(--sc-t-lg)] font-semibold underline decoration-line decoration-2 underline-offset-[0.3em] transition-colors duration-150 hover:decoration-accent";
 
+// Act 5, Resolve. The ground inverts (it nests the opposite theme) and the
+// type drops to the quietest setting on the page. Nothing fades: the last
+// screen holds the form, the links and the small print.
 export function ContactFooter() {
-  return (
-    <footer id="contact" className="border-t border-line">
-      <div className="mx-auto max-w-[1200px] px-5 py-[60px] md:px-10 md:py-[100px]">
-        <SectionHeading
-          number="04"
-          label="Contact"
-          title={
-            <>
-              Let&apos;s <span className="text-accent">collaborate.</span>
-            </>
-          }
-        >
-          <p>I am currently open to developer roles and freelance projects.</p>
-        </SectionHeading>
+  const theme = useTheme();
 
-        <div className="grid gap-10 md:grid-cols-2 md:gap-16">
-          <div className="flex flex-col items-start gap-5">
-            <a href="https://www.linkedin.com/in/david-tuisaula-5655bb3b5" className={LINK}>
-              LinkedIn
-            </a>
-            <a href="https://github.com/King5ula" className={LINK}>
-              GitHub
-            </a>
-            <a href="mailto:davidtuisaulaauvaa@gmail.com" className={LINK}>
-              Email Me
-            </a>
-          </div>
-          <ContactForm />
+  return (
+    <footer
+      id="contact"
+      data-theme={theme === "dark" ? "light" : "dark"}
+      className="bg-bg px-5 pt-[var(--sc-section)] text-ink md:px-10"
+    >
+      <div className="grid gap-[clamp(2.5rem,5vw,5rem)] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <div data-sc-in data-sc-stagger="70">
+          <h2 className="text-[length:var(--sc-t-2xl)] font-bold leading-[1.06] tracking-[-0.03em]">
+            Get in touch
+          </h2>
+          <p className="mt-5 max-w-[44ch] text-[length:var(--sc-t-base)] leading-[1.6] text-muted">
+            I am open to developer roles and freelance projects. A message here reaches me
+            directly, or ask the AI version of me in the corner.
+          </p>
+          <ul className="mt-8 flex flex-col items-start gap-4">
+            <li>
+              <a href="mailto:davidtuisaulaauvaa@gmail.com" className={LINK}>
+                davidtuisaulaauvaa@gmail.com
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/david-tuisaula-5655bb3b5" className={LINK}>
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/King5ula" className={LINK}>
+                GitHub
+              </a>
+            </li>
+          </ul>
         </div>
+        <ContactForm />
       </div>
 
-      <div className="flex flex-wrap justify-between gap-2 border-t border-line px-5 py-6 font-mono text-[0.75rem] uppercase tracking-[0.15em] text-muted md:px-10">
-        <span>David Tuisaula · Full Stack Developer</span>
-        <span>© 2026 · Aotearoa</span>
+      <div className="mt-[clamp(3rem,7vw,6rem)] flex flex-wrap justify-between gap-2 border-t border-line py-6 text-muted">
+        <span className="mono-label">David Tuisaula / Full stack developer</span>
+        <span className="mono-label">2026 / Aotearoa</span>
       </div>
     </footer>
   );

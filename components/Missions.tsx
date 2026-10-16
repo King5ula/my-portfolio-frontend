@@ -1,89 +1,75 @@
-import { ProjectGrid } from "@/components/ProjectGrid";
-import { SectionHeading } from "@/components/SectionHeading";
+import { Quake } from "@/components/Quake";
 import { MISSIONS, type Mission } from "@/lib/missions";
 
-function MissionCard({ mission }: { mission: Mission }) {
+// Each row is its own flow act, so its title wipe runs off that row's own
+// visibility rather than the whole section's.
+function MissionRow({ mission }: { mission: Mission }) {
   return (
-    <article className="group flex flex-col rounded-[28px] border border-line bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent md:p-8">
-      <div className="flex items-start justify-between gap-4">
-        <span className="font-mono text-[0.8rem] font-semibold uppercase tracking-[0.2em] text-accent">
-          {mission.label}
-        </span>
-        <a
-          href={mission.repoUrl}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`${mission.title} on GitHub`}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line text-ink transition-colors duration-200 hover:border-accent hover:text-accent"
-        >
-          ↗
-        </a>
+    <article
+      data-sc-act="flow"
+      className="grid gap-x-10 gap-y-6 border-t border-line py-[clamp(2.5rem,6vw,4.5rem)] md:grid-cols-[13rem_1fr]"
+    >
+      <div className="flex flex-row flex-wrap gap-x-4 gap-y-1 md:flex-col">
+        <span className="mono-label text-accent">{mission.label}</span>
+        <span className="mono-label text-muted">{mission.role}</span>
       </div>
 
-      <h3 className="mt-6 text-[1.35rem] font-bold leading-[1.25] tracking-[-0.01em]">
-        {mission.title}
-      </h3>
-      <p className="mt-1 font-mono text-[0.8rem] text-accent">{mission.role}</p>
-      <p className="mt-4 leading-[1.6] text-muted">{mission.summary}</p>
+      <div>
+        <div data-sc-reveal="left" data-sc-reveal-at="0.04 0.32" className="pb-[0.08em]">
+          <Quake
+            as="h3"
+            text={mission.title}
+            className="poster-title text-[clamp(2.1rem,5.4vw,5rem)]"
+          />
+        </div>
 
-      <ul className="mt-4 space-y-2 text-[0.95rem] leading-[1.5]">
-        {mission.highlights.map((highlight) => (
-          <li key={highlight} className="flex gap-3">
-            <span className="text-accent">•</span>
-            <span>{highlight}</span>
-          </li>
-        ))}
-      </ul>
+        <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+          <p className="max-w-[62ch] text-[length:var(--sc-t-lg)] leading-[1.5]">{mission.summary}</p>
+          <ul className="space-y-3 text-[length:var(--sc-t-sm)] leading-[1.6] text-muted">
+            {mission.highlights.map((highlight) => (
+              <li key={highlight} className="border-l border-line pl-4">
+                {highlight}
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      <div className="mt-auto flex flex-wrap gap-2 pt-6">
-        {mission.tags.map((tag) => (
-          <span
-            key={tag}
-            className="rounded-full border border-line bg-bg px-3 py-1 font-mono text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-muted"
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
+          <p className="mono-label text-muted">{mission.tags.join("  /  ")}</p>
+          <a
+            href={mission.repoUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-sm text-[0.95rem] font-semibold underline decoration-line decoration-2 underline-offset-[0.35em] transition-colors duration-150 hover:decoration-accent"
           >
-            {tag}
-          </span>
-        ))}
+            Code on GitHub<span className="sr-only">: {mission.title}</span>
+          </a>
+        </div>
       </div>
     </article>
   );
 }
 
+// Act 2, Respect. Calm reading, with each title's wipe as the intense beat.
 export function Missions() {
   return (
-    <section id="missions" className="py-[60px] md:py-[100px]">
-      <div className="mx-auto max-w-[1200px] px-5 md:px-10">
-        <SectionHeading
-          number="02"
-          label="Missions"
-          title={
-            <>
-              Four missions. <span className="text-accent">Real briefs, shipped.</span>
-            </>
-          }
-        >
-          <p>
-            Each mission was a client-style brief from my diploma, built solo or in a team. The
-            arrow on each card opens the code on GitHub.
-          </p>
-        </SectionHeading>
-
-        <div className="grid gap-8 bento:grid-cols-2">
-          {MISSIONS.map((mission) => (
-            <MissionCard key={mission.title} mission={mission} />
-          ))}
-        </div>
+    <section id="missions" className="px-5 pb-[var(--sc-section)] pt-[clamp(3rem,8vw,7rem)] md:px-10">
+      <div data-sc-in data-sc-stagger="70" className="mb-[clamp(2.5rem,6vw,5rem)] max-w-[60rem]">
+        <Quake
+          as="h2"
+          text="Four missions. Real briefs."
+          className="poster-title block text-[clamp(2.6rem,7vw,6.5rem)]"
+        />
+        <p className="mt-6 max-w-[56ch] text-[length:var(--sc-t-lg)] leading-[1.55] text-muted">
+          I spent years in real estate and telecommunications, building CRM systems and keeping
+          customer data in sync, before moving into software to build those tools properly. These
+          are the client-style briefs from my diploma, solo and in teams.
+        </p>
       </div>
 
-      <div id="projects" className="mt-20">
-        <div className="flex flex-col items-center justify-center gap-4 px-5 pb-5 text-center md:px-10">
-          <h3 className="text-[2rem] font-bold">Working on</h3>
-          <p className="mt-1 text-muted">
-            A full-stack application built from scratch, currently in development.
-          </p>
-        </div>
-        <ProjectGrid />
-      </div>
+      {MISSIONS.map((mission) => (
+        <MissionRow key={mission.title} mission={mission} />
+      ))}
     </section>
   );
 }
